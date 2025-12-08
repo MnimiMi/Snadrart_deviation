@@ -479,6 +479,114 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPriceListPricePriceListPrice
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'price_list_prices';
+  info: {
+    displayName: 'Price_list.price';
+    pluralName: 'price-list-prices';
+    singularName: 'price-list-price';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-list-price.price-list-price'
+    >;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price_list_area: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::price-listareas.price-listareas'
+    >;
+    price_list_service: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::service.service'
+    >;
+    price_list_sub_category: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::sub-category.sub-category'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPriceListareasPriceListareas
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'pricelistareas';
+  info: {
+    displayName: 'Price_list.areas';
+    pluralName: 'pricelistareas';
+    singularName: 'price-listareas';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-listareas.price-listareas'
+    >;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price_list_prices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-list-price.price-list-price'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -516,12 +624,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    price: Schema.Attribute.Decimal &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    price_list_prices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-list-price.price-list-price'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     sub_category: Schema.Attribute.Relation<
       'manyToOne',
@@ -576,6 +682,10 @@ export interface ApiSubCategorySubCategory extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    price_list_prices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::price-list-price.price-list-price'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
@@ -1096,6 +1206,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
+      'api::price-list-price.price-list-price': ApiPriceListPricePriceListPrice;
+      'api::price-listareas.price-listareas': ApiPriceListareasPriceListareas;
       'api::service.service': ApiServiceService;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'plugin::content-releases.release': PluginContentReleasesRelease;

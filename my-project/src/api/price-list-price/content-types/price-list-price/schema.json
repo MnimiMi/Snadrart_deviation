@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "price_list_prices",
+  "info": {
+    "singularName": "price-list-price",
+    "pluralName": "price-list-prices",
+    "displayName": "Price_list.price"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "price_list_service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "price_list_prices"
+    },
+    "price_list_area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::price-listareas.price-listareas",
+      "inversedBy": "price_list_prices"
+    },
+    "price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "price_list_sub_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sub-category.sub-category",
+      "inversedBy": "price_list_prices"
+    }
+  }
+}

@@ -128,3 +128,4 @@ exports
 .strapi-updater.json
 .strapi-cloud.json
 /dist/
+/dist/
