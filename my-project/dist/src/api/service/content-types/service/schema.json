@@ -31,14 +31,6 @@
                 }
             }
         },
-        "price": {
-            "type": "decimal",
-            "pluginOptions": {
-                "i18n": {
-                    "localized": true
-                }
-            }
-        },
         "order": {
             "type": "integer",
             "pluginOptions": {
@@ -58,6 +50,12 @@
             "relation": "manyToOne",
             "target": "api::sub-category.sub-category",
             "inversedBy": "services"
+        },
+        "price_list_prices": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::price-list-price.price-list-price",
+            "mappedBy": "price_list_service"
         }
     }
 }

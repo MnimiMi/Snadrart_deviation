@@ -46,6 +46,12 @@
             "relation": "oneToMany",
             "target": "api::service.service",
             "mappedBy": "sub_category"
+        },
+        "price_list_prices": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::price-list-price.price-list-price",
+            "mappedBy": "price_list_sub_category"
         }
     }
 }
